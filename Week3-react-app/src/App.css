@@ -23,8 +23,7 @@ main {
   box-sizing: border-box;
   border-bottom: 0.5rem solid;
   width: 100%;
-  min-height: 100%;
-  height: auto;
+  min-height: auto;
 }
 
 section, aside {
@@ -34,9 +33,11 @@ section, aside {
 }
 
 aside {
-  width: 25%;
+  width: 220%;
   min-width: 180px;
   background-color: #deded8;
+  text-align: left;
+  padding-left: 20px;
 }
 
 section {
@@ -49,7 +50,7 @@ section {
   width: 100%;
   border: 3px solid green;
   padding: 10px;
-  margin-left: 0;
+  margin-left: 240px;
   text-align: left;
 }
 

@@ -54,9 +54,6 @@ function Registration() {
             <br /><br />
             <input type="submit" id="button" value="Register" />
             <a href="">Learn more</a>
-            {/* <div className="center" id="hiddenSection">
-                <p id="hiddenParagraph"></p>
-            </div> */}
         </form>
     );
 }
