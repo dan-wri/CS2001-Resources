@@ -1,0 +1,97 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0rem;
+  text-align: center;
+  height: 100vh;
+}
+
+header{
+  background-image:url(./src/assets/SharingFood.jpg);
+  background-repeat: repeat;
+  background-size: contain;
+  background-position: center;
+  height:200px;
+  width: 100vw;
+  margin: auto;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  border-bottom: 0.5rem solid;
+  width: 100%;
+  min-height: 100%;
+  height: auto;
+}
+
+section, aside {
+  padding: 0.5rem;
+  box-sizing: border-box;
+  min-height: 100%;
+}
+
+aside {
+  width: 25%;
+  min-width: 180px;
+  background-color: #deded8;
+}
+
+section {
+  min-width: 350px;
+  width: 75%;
+}
+
+.center {
+  margin: auto;
+  width: 100%;
+  border: 3px solid green;
+  padding: 10px;
+  margin-left: 0;
+  text-align: left;
+}
+
+.textInput {
+    display: block;
+    width: auto;
+    text-align: left;
+    margin-right: 10px;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 0em;
+}
+
+.read-the-docs {
+  color: #888;
+}
