@@ -1,10 +1,12 @@
 package com.example.demo;
 
-import com.example.demo.Models.*;
-import com.example.demo.Repos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import com.example.demo.Models.User;
+import com.example.demo.Models.UserType;
+import com.example.demo.Repos.UserRepository;
 
 
 @Component

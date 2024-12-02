@@ -1,6 +1,5 @@
-import {useRef} from "react";
 import axios from "axios";
-
+import {useRef} from "react";
 
 export default function Registration(){
     const name=useRef();
@@ -42,7 +41,7 @@ export default function Registration(){
     
         if (validateForm()) {
             try {
-                const response = await axios.post('https://reqres.in/api/users', {
+                const response = await axios.post('http://localhost:8080/user', {
                     name: name.current.value,
                     email: email.current.value,
                     password: password.current.value,

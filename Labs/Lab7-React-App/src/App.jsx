@@ -1,11 +1,13 @@
 import './App.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Registration from './components/Registration'
-import Home from './components/Home'
-import Help from './components/Help'
-import Login from './components/Login'
-import Layout from './components/Layout'
 
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
+import Deletion from './components/Deletion'
+import Help from './components/Help'
+import Home from './components/Home'
+import Layout from './components/Layout'
+import Login from './components/Login'
+import Registration from './components/Registration'
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
           <Route path={'/register'} element={<Registration/>}></Route>
           <Route path={'/login'} element={<Login/>}></Route>
           <Route path={'/help'} element={<Help/>}></Route>
+          <Route path={'/delete'} element={<Deletion/>}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
