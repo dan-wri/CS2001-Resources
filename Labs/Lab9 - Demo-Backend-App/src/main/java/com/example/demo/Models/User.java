@@ -2,11 +2,13 @@ package com.example.demo.Models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -15,6 +17,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -24,7 +27,8 @@ import jakarta.validation.constraints.NotBlank;
 @Entity
 @Table(name = "AppUsers")
 @EntityListeners(AuditingEntityListener.class)
-public class User implements Serializable {
+public class User implements Serializable 
+{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -55,14 +59,19 @@ public class User implements Serializable {
 	@LastModifiedDate
 	private Date updatedAt;
 	
+	@OneToMany(mappedBy = "user", cascade=CascadeType.ALL)
+	private List<Order> orders;
+
 	
-	 public User() {
+	public User() 
+	{
 			super();
 			// Auto-generated constructor stub
 	}
 		
 	 
-	 public User(String name, String email, String password, UserType userType) {
+	public User(String name, String email, String password, UserType userType) 
+	{
 		super();
 		this.name = name;
 		this.email = email;
@@ -71,56 +80,67 @@ public class User implements Serializable {
 	}
 	
 	
-	public Long getId() {
+	public Long getId() 
+	{
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Long id) 
+	{
 		this.id = id;
 	}
 
-	public String getEmail() {
+	public String getEmail() 
+	{
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(String email) 
+	{
 		this.email = email;
 	}
 
 
-	public String getName() {
+	public String getName() 
+	{
 		return name;
 	}
 
 
-	public void setName(String name) {
+	public void setName(String name) 
+	{
 		this.name = name;
 	}
 
 
-	public String getPassword() {
+	public String getPassword() 
+	{
 		return password;
 	}
 
 
-	public void setPassword(String password) {
+	public void setPassword(String password) 
+	{
 		this.password = password;
 	}
 
 
-	public UserType getUserType() {
+	public UserType getUserType() 
+	{
 		return userType;
 	}
 
 
-	public void setUserType(UserType userType) {
+	public void setUserType(UserType userType) 
+	{
 		this.userType = userType;
 	}
 
 
 
 	@Override
-	public String toString() {
+	public String toString() 
+	{
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", userType="
 				+ userType + "]";
 	}

@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.Exceptions.ResourceNotFoundException;
 import com.example.demo.Models.User;
 import com.example.demo.Repos.UserRepository;
-import com.example.demo.Exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {

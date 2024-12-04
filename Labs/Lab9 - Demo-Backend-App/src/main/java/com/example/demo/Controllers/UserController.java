@@ -55,13 +55,13 @@ public class UserController {
     }
     
     
-    @GetMapping("/user/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) 
-    {
-        Optional<User> user = userService.findByID(id);
-        return user.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-               .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
+    // @GetMapping("/user/{id}")
+    // public ResponseEntity<User> getUserById(@PathVariable Long id) 
+    // {
+    //     Optional<User> user = userService.findByID(id);
+    //     return user.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+    //            .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    // }
 
     //Delete a User by ID
     @DeleteMapping("/user/{id}")
