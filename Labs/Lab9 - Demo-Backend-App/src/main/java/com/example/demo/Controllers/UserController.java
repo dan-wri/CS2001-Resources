@@ -23,31 +23,36 @@ public class UserController {
     @Autowired
 	UserService userService;
     
-    //Get All Users (done)
-
+    // Get All Users
     @GetMapping("/user")
-    public ResponseEntity<List<User>> getAllUsers() 
-    {
-        List<User> users = userService.getUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+    public List<User> getUsers() {
+        return userService.getUsers();
     }
 
-    //Post a User (done)
-
+    //Post a User
     @PostMapping("/user")
-    public ResponseEntity<Void> createUser(@RequestBody UserPostDTO userPostDTO) 
-    {
-        // Convert UserPostDTO to User
-        User newUser = new User();
-        newUser.setName(userPostDTO.getName());
-        newUser.setEmail(userPostDTO.getEmail());
-        newUser.setPassword(userPostDTO.getPassword());
-        newUser.setUserType(userPostDTO.getUserType());
-        userService.addUser(newUser);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<Optional<User>> addUser(@RequestBody UserPostDTO newUserDTO) {
+    	
+    	if (newUserDTO.getName()==null || 
+    		newUserDTO.getEmail()==null ||
+    		newUserDTO.getPassword()==null ||
+    		newUserDTO.getUserType() == UserType.NONE) {
+            return new ResponseEntity<>(Optional.ofNullable(null), HttpStatus.BAD_REQUEST);
+        }
+    	
+    	User newUser = new User(newUserDTO.getName(), newUserDTO.getEmail(),
+    			newUserDTO.getPassword(), newUserDTO.getUserType());
+    	userService.addUser(newUser);
+    	return new ResponseEntity<>(Optional.ofNullable(newUser),HttpStatus.CREATED);
+
     }
     
-    //Get User by ID (done)
+    //Get User by ID
+    @GetMapping("/user/{id}")
+    public Optional<User> getUserById(@PathVariable(value = "id") long Id) {
+        return userService.findByID(Id);
+    }
+    
     
     @GetMapping("/user/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) 
@@ -58,28 +63,17 @@ public class UserController {
     }
 
     //Delete a User by ID
-
     @DeleteMapping("/user/{id}")
-    public ResponseEntity<Void> deleteUserById(@PathVariable Long id) 
-    {
-        try 
-        {
-            userService.deleteUser(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } 
-        catch (Exception e) 
-        {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public String deleteUser(@PathVariable(value = "id") long Id) {
+        userService.deleteUser(Id);
+        return "User Deleted"; 
     }
     
-    //Get User by Email (done)
-
+    //Get User by Email
     @GetMapping("/user/findByEmail")
-    public ResponseEntity<User> getUserByEmail(@RequestParam String email) 
-    {
-        User user = userService.findByEmail(email);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+    public Optional<User> getUserByEmail(@RequestParam String email) {
+    	return Optional.ofNullable(userService.findByEmail(email));
     }
+
    
 }
