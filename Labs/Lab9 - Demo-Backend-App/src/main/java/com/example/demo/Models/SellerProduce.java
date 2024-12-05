@@ -1,9 +1,11 @@
 package com.example.demo.Models;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
@@ -12,13 +14,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "OrderItems")
+@Table(name = "SellerProduce")
 @EntityListeners(AuditingEntityListener.class)
-public class OrderItems implements Serializable 
+public class SellerProduce implements Serializable 
 {
 
     private static final long serialVersionUID = 1L;
@@ -28,33 +31,36 @@ public class OrderItems implements Serializable
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = false)
-    private Order order;
+    @JoinColumn(name = "seller_id", nullable = false)
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "seller_produce_id", nullable = false)
-    private SellerProduce sellerProduce;
+    @JoinColumn(name = "produce_id", nullable = false)
+    private Produce produce;
 
     @NotNull
 	int quantity;
 
     @NotNull
-	float priceAtOrder;
+	float price;
+
+    @OneToMany(mappedBy = "sellerProduce", cascade=CascadeType.ALL)
+	private List<OrderItems> orderItems;
 
     // Default constructor
-    public OrderItems() 
+    public SellerProduce() 
     {
         super();
     }
 
     // Constructor with user
-    public OrderItems(Order order, SellerProduce sellerProduce ,int quantity, float priceAtOrder) 
+    public SellerProduce(User user, Produce produce, int quantity, float price) 
     {
         super();
-        this.order = order;
-        this.sellerProduce = sellerProduce;
-        this.quantity = quantity;
-        this.priceAtOrder = priceAtOrder;
+        this.user = user;
+        this.produce = produce;
+        this. quantity = quantity;
+        this.price = price;
     }
 
     // Getters and setters
@@ -68,24 +74,24 @@ public class OrderItems implements Serializable
         this.id = id;
     }
 
-    public Order getOrder() 
+    public User user() 
     {
-        return order;
+        return user;
     }
 
-    public void setOrder(Order order) 
+    public void setUser(User user) 
     {
-        this.order = order;
+        this.user = user;
     }
 
-    public SellerProduce getSellerProduce() 
+    public Produce produce() 
     {
-        return sellerProduce;
+        return produce;
     }
 
-    public void setSellerProduce(SellerProduce sellerProduce) 
+    public void setProduce(Produce produce) 
     {
-        this.sellerProduce = sellerProduce;
+        this.produce = produce;
     }
 
     public int getQuantity() 
@@ -98,19 +104,19 @@ public class OrderItems implements Serializable
 		this.quantity = quantity;
 	}
 
-    public float getPriceAtOrder() 
+    public float getPrice() 
 	{
-		return priceAtOrder;
+		return price;
 	}
 
-	public void setPriceAtOrder(float priceAtOrder) 
+	public void setPrice(float price) 
 	{
-		this.priceAtOrder = priceAtOrder;
+		this.price = price;
 	}
 
     @Override
     public String toString() 
     {
-        return "OrderItems [id=" + id + ", order=" + (order != null ? order.getId() : "null") + ", sellerProduce=" + (sellerProduce != null ? sellerProduce.getId() : "null") + ", quantity=" + quantity + ", priceAtOrder=" + priceAtOrder + "]";
+        return "OrderItems [id=" + id + ", seller_id=" + (user != null ? user.getId() : "null") + ", produce_id=" + (produce != null ? produce.getId() : "null") + ", quantity=" + quantity + ", price=" + price + "]";
     }
 }

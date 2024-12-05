@@ -8,18 +8,15 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "SellerProduce")
+@Table(name = "Produce")
 @EntityListeners(AuditingEntityListener.class)
 public class Produce implements Serializable 
 {
@@ -30,18 +27,11 @@ public class Produce implements Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = false)
-    private Order order;
-
     @NotBlank
-	int quantity;
+    String name;
 
-    @NotBlank
-	float priceAtOrder;
-
-    @OneToMany(mappedBy = "sellerProduce", cascade=CascadeType.ALL)
-	private List<OrderItems> orderItems;
+    @OneToMany(mappedBy = "produce", cascade=CascadeType.ALL)
+	private List<SellerProduce> SellerProduce;
 
     // Default constructor
     public Produce() 
@@ -50,12 +40,10 @@ public class Produce implements Serializable
     }
 
     // Constructor with user
-    public Produce(Order order, int quantity, float priceAtOrder) 
+    public Produce(String name) 
     {
         super();
-        this.order = order;
-        this. quantity = quantity;
-        this.priceAtOrder = priceAtOrder;
+        this.name = name;
     }
 
     // Getters and setters
@@ -69,39 +57,19 @@ public class Produce implements Serializable
         this.id = id;
     }
 
-    public Order getOrder() 
-    {
-        return order;
-    }
-
-    public void setOrder(Order order) 
-    {
-        this.order = order;
-    }
-
-    public int getQuantity() 
+    public String getName() 
 	{
-		return quantity;
+		return name;
 	}
 
-	public void setQuantity(int quantity) 
+	public void setName(String name) 
 	{
-		this.quantity = quantity;
-	}
-
-    public float getPriceAtOrder() 
-	{
-		return priceAtOrder;
-	}
-
-	public void setPriceAtOrder(float priceAtOrder) 
-	{
-		this.priceAtOrder = priceAtOrder;
+		this.name = name;
 	}
 
     @Override
     public String toString() 
     {
-        return "OrderItems [id=" + id + ", order=" + (order != null ? order.getId() : "null") + ", quantity=" + quantity + ", priceAtOrder=" + priceAtOrder + "]";
+        return "OrderItems [id=" + id + ", name=" + name + "]";
     }
 }

@@ -62,6 +62,9 @@ public class User implements Serializable
 	@OneToMany(mappedBy = "user", cascade=CascadeType.ALL)
 	private List<Order> orders;
 
+	@OneToMany(mappedBy = "user", cascade=CascadeType.ALL)
+	private List<SellerProduce> sellerProduce;
+
 	
 	public User() 
 	{
