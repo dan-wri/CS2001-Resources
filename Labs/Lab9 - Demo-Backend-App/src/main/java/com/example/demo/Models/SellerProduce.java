@@ -74,7 +74,7 @@ public class SellerProduce implements Serializable
         this.id = id;
     }
 
-    public User user() 
+    public User getUser() 
     {
         return user;
     }
@@ -84,7 +84,7 @@ public class SellerProduce implements Serializable
         this.user = user;
     }
 
-    public Produce produce() 
+    public Produce getProduce() 
     {
         return produce;
     }

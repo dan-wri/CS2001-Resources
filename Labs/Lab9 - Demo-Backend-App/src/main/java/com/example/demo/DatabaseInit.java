@@ -15,6 +15,7 @@ import com.example.demo.Repos.OrderRepository;
 import com.example.demo.Repos.ProduceRepository;
 import com.example.demo.Repos.SellerProduceRepository;
 import com.example.demo.Repos.UserRepository;
+import com.example.demo.Services.OrderService;
 
 
 
@@ -36,6 +37,8 @@ public class DatabaseInit implements CommandLineRunner
 	@Autowired
     private OrderItemsRepository orderItemsRepository;
 	
+	@Autowired
+    private OrderService orderService;
 	
 	@Override
 	 public void run(String... args) throws Exception 
@@ -89,5 +92,8 @@ public class DatabaseInit implements CommandLineRunner
 
 
 		System.out.println("Database initialization complete!");
+
+		String buyerEmail = "bob@sample.com";
+		orderService.printOrderWithTotalCost(buyerEmail);
 	}
 }
