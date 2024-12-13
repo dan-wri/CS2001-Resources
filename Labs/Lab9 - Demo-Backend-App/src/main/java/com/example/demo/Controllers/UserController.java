@@ -41,8 +41,7 @@ public class UserController {
             return new ResponseEntity<>(Optional.ofNullable(null), HttpStatus.BAD_REQUEST);
         }
     	
-    	User newUser = new User(newUserDTO.getName(), newUserDTO.getEmail(),
-    			newUserDTO.getPassword(), newUserDTO.getUserType());
+    	User newUser = new User(newUserDTO.getName(), newUserDTO.getEmail(), newUserDTO.getPassword(), newUserDTO.getUserType());
     	userService.addUser(newUser);
     	return new ResponseEntity<>(Optional.ofNullable(newUser),HttpStatus.CREATED);
 
